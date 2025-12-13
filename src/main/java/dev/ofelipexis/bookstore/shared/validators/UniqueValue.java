@@ -1,4 +1,4 @@
-package dev.ofelipexis.bookstore.category.validators;
+package dev.ofelipexis.bookstore.shared.validators;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -6,11 +6,13 @@ import jakarta.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = UniqueNameValidator.class)
+@Constraint(validatedBy = UniqueValueValidator.class)
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface UniqueName {
-    String message() default "Category's name already exists";
+public @interface UniqueValue {
+    String message() default "Valor já cadastrado";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
+    String fieldName();
+    Class<?> domainClass();
 }

@@ -1,6 +1,6 @@
 package dev.ofelipexis.bookstore.author;
 
-import dev.ofelipexis.bookstore.author.validators.UniqueEmail;
+import dev.ofelipexis.bookstore.shared.validators.UniqueValue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -11,7 +11,7 @@ public class AuthorRequest {
     private String name;
     @NotBlank(message = "E-mail não pode estar em branco")
     @Email(message = "E-mail deve estar em um formato válido")
-    @UniqueEmail(message = "E-mail já cadastrado")
+    @UniqueValue(fieldName = "email", domainClass = Author.class, message = "E-mail de Autor já cadastrado")
     private String email;
     @Size(max = 400, message = "Descrição deve ter no máximo 400 caracteres")
     private String description;

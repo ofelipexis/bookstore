@@ -11,6 +11,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @NotBlank
+    @Column(unique = true)
     String name;
 
     @Deprecated

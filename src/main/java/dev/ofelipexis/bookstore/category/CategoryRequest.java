@@ -1,12 +1,12 @@
 package dev.ofelipexis.bookstore.category;
 
-import dev.ofelipexis.bookstore.category.validators.UniqueName;
+import dev.ofelipexis.bookstore.shared.validators.UniqueValue;
 import jakarta.validation.constraints.NotBlank;
 
 public class CategoryRequest {
 
     @NotBlank(message = "Nome não pode estar em branco")
-    @UniqueName(message = "Nome já cadastrado")
+    @UniqueValue(fieldName = "name", domainClass = Category.class, message = "Nome de Categoria já cadastrado")
     private String name;
 
     public CategoryRequest(String name) {
