@@ -1,7 +1,5 @@
-package dev.ofelipexis.bookstore.book;
+package dev.ofelipexis.bookstore.countrystate;
 
-import dev.ofelipexis.bookstore.author.Author;
-import dev.ofelipexis.bookstore.category.Category;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.validation.Valid;
@@ -14,25 +12,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/api/v1")
-public class BookController {
+public class StateController {
 
-    private BookRepository repository;
+    private StateRepository repository;
 
-    public BookController(BookRepository repository) {
+    public StateController(StateRepository repository) {
         this.repository = repository;
     }
 
     @PersistenceContext
     private EntityManager manager;
 
-    @PostMapping(value = "/books")
+    @PostMapping(value = "/states")
     @Transactional
-    public ResponseEntity<BookResponse> create(@RequestBody @Valid BookRequest request) {
-        Book book = request.toModel(
-                id -> manager.find(Category.class, id),
-                id -> manager.find(Author.class, id)
+    public ResponseEntity<StateResponse> create(@RequestBody @Valid StateRequest request) {
+        State state = request.toModel(
+                id -> manager.find(Country.class, id)
         );
-        repository.save(book);
-        return ResponseEntity.ok().body(new BookResponse(book));
+        repository.save(state);
+        return ResponseEntity.ok().body(new StateResponse(state));
     }
 }

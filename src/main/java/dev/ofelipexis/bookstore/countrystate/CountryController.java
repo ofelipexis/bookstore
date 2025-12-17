@@ -1,4 +1,4 @@
-package dev.ofelipexis.bookstore.category;
+package dev.ofelipexis.bookstore.countrystate;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/api/v1")
-public class CategoryController {
+public class CountryController {
 
-    private CategoryRepository repository;
+    private CountryRepository repository;
 
-    public CategoryController(CategoryRepository repository) {
+    public CountryController(CountryRepository repository) {
         this.repository = repository;
     }
 
-    @PostMapping("/categories")
+    @PostMapping(value = "/countries")
     @Transactional
-    public ResponseEntity<CategoryResponse> create(@RequestBody @Valid CategoryRequest request) {
-        Category category = request.toModel();
-        repository.save(category);
-        return ResponseEntity.ok().body(new CategoryResponse(category));
+    public ResponseEntity<CountryResponse> create(@RequestBody @Valid CountryRequest request) {
+        Country country = request.toModel();
+        repository.save(country);
+        return ResponseEntity.ok().body(new CountryResponse(country));
     }
 }
